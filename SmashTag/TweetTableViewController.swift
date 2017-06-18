@@ -17,7 +17,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    
     // when the return (i.e. Search) button is pressed in the keyboard
     // we go off to search for the text in the searchTextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -65,7 +64,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func viewDidLoad() {
-        searchText = "#stanford"
         // we use the row height in the storyboard as an "estimate"
         tableView.estimatedRowHeight = tableView.rowHeight
         // but use whatever autolayout says the height should be as the actual row height
@@ -92,6 +90,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return cell
     }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("hi")
+//    }
 
 
     /*
