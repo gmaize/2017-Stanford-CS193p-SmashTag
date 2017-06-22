@@ -25,6 +25,7 @@ class TweetTableViewCell: UITableViewCell {
     
     private func attributeTweetMentions(_ attributeName: String, _ attributeValue: Any, _ attributedText: NSMutableAttributedString, _ mentions: [Twitter.Mention]) {
         for mention in mentions {
+            print(mention.description)
             attributedText.addAttribute(attributeName, value: attributeValue, range: mention.nsrange)
         }
     }
@@ -43,7 +44,7 @@ class TweetTableViewCell: UITableViewCell {
                     DispatchQueue.main.async {
                         self?.tweetProfileImageView?.image = UIImage(data: imageData)
                     }
-                } else if profileImageURL != self?.tweet?.user.profileImageURL {
+                } else if profileImageURL == self?.tweet?.user.profileImageURL {
                     DispatchQueue.main.async {
                         self?.tweetProfileImageView?.image = nil
                     }

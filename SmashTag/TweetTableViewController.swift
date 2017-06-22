@@ -90,20 +90,18 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("hi")
-//    }
 
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+        var destinationViewController = segue.destination
+        if let navigationViewController = destinationViewController as? UINavigationController {
+            destinationViewController = navigationViewController.visibleViewController ?? destinationViewController
+        }
+        if let selectedTweetCell = sender as? TweetTableViewCell,
+            let mentionsTableViewController = destinationViewController as? TweetMentionsTableViewController {
+                mentionsTableViewController.tweet = selectedTweetCell.tweet
+            }
+        }
 }

@@ -86,6 +86,7 @@
                                     <outlet property="tweetProfileImageView" destination="JK8-NS-UT6" id="RFL-Ld-nJw"/>
                                     <outlet property="tweetTextLabel" destination="rXa-ud-qAV" id="yZC-1s-beh"/>
                                     <outlet property="tweetUserLabel" destination="U8m-2y-1on" id="Eyu-z2-lGu"/>
+                                    <segue destination="8Qn-sz-HTT" kind="show" identifier="showTweetMentions" id="RNl-5W-5ua"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -101,7 +102,71 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="El0-vq-IAf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1005.6" y="126.38680659670166"/>
+            <point key="canvasLocation" x="1002" y="126"/>
+        </scene>
+        <!--Tweet Mentions Table View Controller-->
+        <scene sceneID="gUN-c9-KnO">
+            <objects>
+                <tableViewController id="8Qn-sz-HTT" customClass="TweetMentionsTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tkv-qv-pqo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageMentionCell" rowHeight="80" id="1Bs-xq-ejw" customClass="TweetImageMentionTableViewCell" customModule="SmashTag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Bs-xq-ejw" id="XFa-b9-Yxp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hb6-vb-len">
+                                            <rect key="frame" x="18" y="18" width="339" height="52"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Hb6-vb-len" firstAttribute="leading" secondItem="XFa-b9-Yxp" secondAttribute="leadingMargin" constant="10" id="iX9-Qb-0FC"/>
+                                        <constraint firstItem="Hb6-vb-len" firstAttribute="top" secondItem="XFa-b9-Yxp" secondAttribute="topMargin" constant="10" id="kXm-3w-VvT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Hb6-vb-len" secondAttribute="trailing" constant="10" id="pfO-T4-Rgs"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hb6-vb-len" secondAttribute="bottom" constant="10" id="dT4-XK-Mn7"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imgView" destination="Hb6-vb-len" id="YJo-Lx-suf"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextBasedMentionCell" textLabel="kcI-OL-jxZ" style="IBUITableViewCellStyleDefault" id="rKe-Hy-zBO">
+                                <rect key="frame" x="0.0" y="108" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rKe-Hy-zBO" id="Sv6-8s-o4R">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kcI-OL-jxZ">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="WQz-CN-QhK" kind="show" identifier="searchForTweets" id="8f2-7l-Crr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8Qn-sz-HTT" id="3GH-RI-kre"/>
+                            <outlet property="delegate" destination="8Qn-sz-HTT" id="27Y-2L-p7b"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vd5-XH-Lfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="905"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P9T-SE-hPh">
@@ -122,4 +187,7 @@
             <point key="canvasLocation" x="66.400000000000006" y="126.38680659670166"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8f2-7l-Crr"/>
+    </inferredMetricsTieBreakers>
 </document>
