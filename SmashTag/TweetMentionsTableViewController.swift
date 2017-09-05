@@ -155,17 +155,25 @@ class TweetMentionsTableViewController: UITableViewController {
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationViewController = segue.destination
-        if let navigationViewController = destinationViewController as? UINavigationController {
-            destinationViewController = navigationViewController.visibleViewController ?? destinationViewController
-        }
+        var destinationVC = segue.destination
+        if let navigationVC = destinationVC as? UINavigationController {
+            destinationVC = navigationVC.visibleViewController ?? destinationVC
+		} else if let tabBarVC = destinationVC as? UITabBarController {
+			destinationVC = tabBarVC.viewControllers![0]
+		}
         if let segueID = segue.identifier {
             if segueID == "searchForTweets",
                 let selectedMentionCell = sender as? UITableViewCell,
                 let indexPath = tableView.indexPath(for: selectedMentionCell),
-                let tweetsTableViewController = destinationViewController as? TweetTableViewController {
+                let tweetsTableVC = destinationVC as? TweetTableViewController {
                 let mentionItem = mentionGroups[indexPath.section].data[indexPath.row]
-                tweetsTableViewController.searchText = mentionItem.description
+                tweetsTableVC.searchText = mentionItem.description
+            } else if segueID == "viewImage",
+                let selectedImageCell = sender as? TweetImageMentionTableViewCell,
+                let indexPath = tableView.indexPath(for: selectedImageCell),
+                let imageVC = destinationVC as? ImageViewController {
+                let imageMentionItem = mentionGroups[indexPath.section].data[indexPath.row]
+                imageVC.imageURL = URL(string: imageMentionItem.description)
             }
         }
      }

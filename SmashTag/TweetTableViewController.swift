@@ -14,6 +14,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {
             searchTextField?.delegate = self
+			if searchText != nil {
+				searchTextField.text = searchText
+				title = searchText
+			}
         }
     }
     
@@ -25,7 +29,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return true
     }
-    
+	
+	
     private var tweets = [Array<Twitter.Tweet>]()
     
     var searchText : String? {
@@ -37,6 +42,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tableView.reloadData()
             searchForTweets()
             title = searchText
+			RecentSearchTerms.add(term: searchText!)
         }
     }
     
@@ -102,6 +108,29 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         if let selectedTweetCell = sender as? TweetTableViewCell,
             let mentionsTableViewController = destinationViewController as? TweetMentionsTableViewController {
                 mentionsTableViewController.tweet = selectedTweetCell.tweet
-            }
-        }
+		}
+	}
 }
+
+class RecentSearchTerms {
+	static let maxTerms = 100
+	static let defaults = UserDefaults.standard
+	
+	static func getTerms() -> [String] {
+		return defaults.stringArray(forKey: "RecentSearchTerms") ?? [String]()
+	}
+	
+	static func add(term: String) {
+		let term = term.lowercased().trimmingCharacters(in: .whitespaces)
+
+		var recentTerms = self.getTerms()
+		if recentTerms.contains(term) {
+			recentTerms.remove(at: recentTerms.index(of: term)!)
+		} else if recentTerms.count == maxTerms {
+			recentTerms.remove(at: maxTerms - 1)
+		}
+		recentTerms.insert(term, at: 0)
+		defaults.set(recentTerms, forKey: "RecentSearchTerms")
+	}
+}
+
