@@ -13,7 +13,7 @@
         <!--Search Twitter-->
         <scene sceneID="J7s-nC-lMx">
             <objects>
-                <tableViewController id="WQz-CN-QhK" customClass="TweetTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WQz-CN-QhK" customClass="SmashTweetTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="7kJ-2y-xwQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,15 +218,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTerm" id="dSP-mV-LHc">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="SearchTerm" id="dSP-mV-LHc">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dSP-mV-LHc" id="D8E-iO-bKb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="WQz-CN-QhK" kind="show" id="kNr-Oq-qy6"/>
+                                    <segue destination="hVl-yP-oO4" kind="show" trigger="accessoryAction" id="kHU-9p-Lzg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -241,10 +242,37 @@
             </objects>
             <point key="canvasLocation" x="2879.1999999999998" y="-579.76011994002999"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="HQ0-Ab-XZp">
+            <objects>
+                <tableViewController id="hVl-yP-oO4" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uI5-bP-YVU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9ci-ke-J2e">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ci-ke-J2e" id="eV4-Ze-VcT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hVl-yP-oO4" id="8Qm-F1-ro1"/>
+                            <outlet property="delegate" destination="hVl-yP-oO4" id="DeB-a0-fZI"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="06D-gI-XFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3594" y="-580"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="P9T-SE-hPh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xeh-oP-5iN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ucp-bS-HB4" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="Azm-aJ-KnL"/>
                     <toolbarItems/>
@@ -257,6 +285,7 @@
                         <segue destination="WQz-CN-QhK" kind="relationship" relationship="rootViewController" id="bat-Yy-MwU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xeh-oP-5iN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1001" y="125"/>
         </scene>
@@ -266,6 +295,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OEw-Fp-VzH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="qYk-hx-HoO">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
