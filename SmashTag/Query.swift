@@ -33,7 +33,7 @@ class Query: NSManagedObject {
 				query.addToTweets(tweet!)
 				for mentionInfo in tweetInfo.hashtags + tweetInfo.userMentions {
 					let mention = try? Mention.findOrCreateMention(from: mentionInfo, for: searchText.lowercased(), in: context)
-					if mention != nil {
+					if mention != nil, !(query.mentions?.contains(mention!))! {
 						query.addToMentions(mention!)
 					}
 				}
