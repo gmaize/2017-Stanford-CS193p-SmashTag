@@ -11,43 +11,34 @@ import CoreData
 import Twitter
 
 class Query: NSManagedObject {
-	class func findOrCreateQuery(matching searchText: String, with tweets: [Twitter.Tweet]?, in context: NSManagedObjectContext) throws -> Query {
+	class func findOrCreateQuery(matching searchText: String, with twitterTweets: [Twitter.Tweet], in context: NSManagedObjectContext) throws -> Query {
 		let request : NSFetchRequest<Query> = Query.fetchRequest()
 		request.predicate = NSPredicate(format: "text = %@", searchText)
-		
+		let query: Query
 		do {
 			let matches = try context.fetch(request)
 			if matches.count > 0 {
 				assert(matches.count == 1, "Query.findOrCreateQuery -- database inconsistency.")
-				return matches[0]
+				query = matches[0]
+			} else {
+				query = Query(context: context)
+				query.text = searchText
 			}
 		} catch {
 			throw error
 		}
-		
-		let query = Query(context: context)
-		query.text = searchText
-		if tweets == nil {
-			return query
-		}
-		var queryTweets = Array<Tweet>()
-		var queryMentions = Array<Mention>()
-		for tweet in tweets! {
-			let queryTweet = try? Tweet.findOrCreateTweet(matching: tweet, in: context)
-			if queryTweet == nil {
-				continue
-			}
-			queryTweets.append(queryTweet!)
-			for mention in tweet.hashtags + tweet.userMentions {
-				let queryMention = try? Mention.findOrCreateMention(matching: mention, in: context)
-				if queryMention == nil {
-					continue
+		for tweetInfo in twitterTweets {
+			let tweet = try? Tweet.findOrCreateTweet(with: tweetInfo, in: context)
+			if tweet != nil, !(query.tweets?.contains(tweet!))! {
+				query.addToTweets(tweet!)
+				for mentionInfo in tweetInfo.hashtags + tweetInfo.userMentions {
+					let mention = try? Mention.findOrCreateMention(from: mentionInfo, for: searchText, in: context)
+					if mention != nil {
+						query.addToMentions(mention!)
+					}
 				}
-				queryMentions.append(queryMention!)
 			}
 		}
-		query.mentions = NSSet(array: queryMentions)
-		query.tweets = NSSet(array: queryTweets)
 		return query
 	}
 

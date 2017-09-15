@@ -227,7 +227,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="WQz-CN-QhK" kind="show" id="kNr-Oq-qy6"/>
-                                    <segue destination="hVl-yP-oO4" kind="show" trigger="accessoryAction" id="kHU-9p-Lzg"/>
+                                    <segue destination="hVl-yP-oO4" kind="show" identifier="Show Popular Mentions" trigger="accessoryAction" id="kHU-9p-Lzg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -242,21 +242,37 @@
             </objects>
             <point key="canvasLocation" x="2879.1999999999998" y="-579.76011994002999"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Popular Mentions Table View Controller-->
         <scene sceneID="HQ0-Ab-XZp">
             <objects>
-                <tableViewController id="hVl-yP-oO4" sceneMemberID="viewController">
+                <tableViewController id="hVl-yP-oO4" customClass="PopularMentionsTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uI5-bP-YVU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9ci-ke-J2e">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Popular Mention Cell" textLabel="C45-eI-ZoT" detailTextLabel="S7J-7I-alV" style="IBUITableViewCellStyleSubtitle" id="9ci-ke-J2e">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ci-ke-J2e" id="eV4-Ze-VcT">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C45-eI-ZoT">
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S7J-7I-alV">
+                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -329,6 +345,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kNr-Oq-qy6"/>
+        <segue reference="xlK-0U-3z0"/>
     </inferredMetricsTieBreakers>
 </document>

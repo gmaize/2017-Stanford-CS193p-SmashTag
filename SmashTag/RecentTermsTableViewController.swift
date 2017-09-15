@@ -39,7 +39,14 @@ class RecentTermsTableViewController: UITableViewController {
 		if let tabBarViewController = destinationViewController as? UITabBarController {
 			destinationViewController = tabBarViewController.viewControllers![0]
 		}
-		if let selectedMentionCell = sender as? UITableViewCell,
+		if segue.identifier == "Show Popular Mentions",
+			let selectedMentionCell = sender as? UITableViewCell,
+			let indexPath = tableView.indexPath(for: selectedMentionCell),
+			let popularMentionsTableVC = destinationViewController as? PopularMentionsTableViewController {
+				let searchTerm = RecentSearchTerms.getTerms()[indexPath.row]
+				popularMentionsTableVC.searchText = searchTerm
+
+		} else if let selectedMentionCell = sender as? UITableViewCell,
 			let indexPath = tableView.indexPath(for: selectedMentionCell),
 			let tweetsTableVC = destinationViewController as? TweetTableViewController {
 				let searchTerm = RecentSearchTerms.getTerms()[indexPath.row]

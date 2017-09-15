@@ -16,7 +16,7 @@
     </entity>
     <elements>
         <element name="Mention" positionX="7621" positionY="-3499" width="128" height="88"/>
-        <element name="Query" positionX="7605" positionY="-3643" width="128" height="88"/>
-        <element name="Tweet" positionX="7405" positionY="-3583" width="128" height="73"/>
+        <element name="Query" positionX="7452" positionY="-3591" width="128" height="88"/>
+        <element name="Tweet" positionX="7434" positionY="-3448" width="128" height="73"/>
     </elements>
 </model>
