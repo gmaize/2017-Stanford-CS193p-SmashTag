@@ -45,6 +45,23 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
 		}
 		return cell
 	}
+	
+	// MARK: - Navigation
+	
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		var destinationViewController = segue.destination
+		if let tabBarViewController = destinationViewController as? UITabBarController {
+			destinationViewController = tabBarViewController.viewControllers![0]
+		}
+		if segue.identifier == "Search For Tweets",
+			let selectedMentionCell = sender as? UITableViewCell,
+			let indexPath = tableView.indexPath(for: selectedMentionCell),
+			let tweetsTableVC = destinationViewController as? TweetTableViewController {
+			let mentionInfo = fetchedResultsController?.object(at: indexPath)
+			tweetsTableVC.searchText = mentionInfo?.keyword
+		}
+	}
 
 }
 
