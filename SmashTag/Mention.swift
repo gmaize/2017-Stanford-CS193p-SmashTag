@@ -12,9 +12,8 @@ import Twitter
 
 class Mention: NSManagedObject {
 	class func findOrCreateMention(from mentionInfo: Twitter.Mention, for searchText: String, in context: NSManagedObjectContext) throws -> Mention {
-		
 		let request : NSFetchRequest<Mention> = Mention.fetchRequest()
-		request.predicate = NSPredicate(format: "keyword = %@ and query.text = %@", mentionInfo.keyword, searchText)
+		request.predicate = NSPredicate(format: "keyword = %@ and query.text = %@", mentionInfo.keyword.lowercased(), searchText.lowercased())
 		
 		do {
 			let matches = try context.fetch(request)
@@ -28,7 +27,7 @@ class Mention: NSManagedObject {
 		}
 		
 		let mention = Mention(context: context)
-		mention.keyword = mentionInfo.keyword
+		mention.keyword = mentionInfo.keyword.lowercased()
 		mention.count = 1
 		return mention
 	}

@@ -21,7 +21,8 @@ class PopularMentionsTableViewController: FetchedResultsTableViewController {
 	private func updateUI() {
 		if let context = container?.viewContext, searchText != nil {
 			let request : NSFetchRequest<Mention> = Mention.fetchRequest()
-			request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false)]
+			request.sortDescriptors = [NSSortDescriptor(key: "count", ascending: false),
+			                           NSSortDescriptor(key: "keyword", ascending: true)]
 			request.predicate = NSPredicate(format: "any query.text = %@ and count > 1", searchText!)
 			fetchedResultsController = NSFetchedResultsController<Mention>(
 				fetchRequest: request,

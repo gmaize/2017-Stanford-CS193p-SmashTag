@@ -13,7 +13,7 @@ import Twitter
 class Query: NSManagedObject {
 	class func findOrCreateQuery(matching searchText: String, with twitterTweets: [Twitter.Tweet], in context: NSManagedObjectContext) throws -> Query {
 		let request : NSFetchRequest<Query> = Query.fetchRequest()
-		request.predicate = NSPredicate(format: "text = %@", searchText)
+		request.predicate = NSPredicate(format: "text = %@", searchText.lowercased())
 		let query: Query
 		do {
 			let matches = try context.fetch(request)
@@ -32,7 +32,7 @@ class Query: NSManagedObject {
 			if tweet != nil, !(query.tweets?.contains(tweet!))! {
 				query.addToTweets(tweet!)
 				for mentionInfo in tweetInfo.hashtags + tweetInfo.userMentions {
-					let mention = try? Mention.findOrCreateMention(from: mentionInfo, for: searchText, in: context)
+					let mention = try? Mention.findOrCreateMention(from: mentionInfo, for: searchText.lowercased(), in: context)
 					if mention != nil {
 						query.addToMentions(mention!)
 					}

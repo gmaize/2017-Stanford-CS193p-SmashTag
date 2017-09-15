@@ -29,7 +29,6 @@ class SmashTweetTableViewController: TweetTableViewController {
 			}
 			_ = try? Query.findOrCreateQuery(matching: self?.searchText ?? "", with: tweets, in: context)
 			try? context.save()
-			self?.printDatabaseStatistics()
 		}
 	}
 	
